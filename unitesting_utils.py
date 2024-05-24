@@ -12,6 +12,7 @@ def load_podcast_data(dataset_name: str='huberman_labs.json') -> list[dict]:
     '''
     try:
         path = f'../data/{dataset_name}'
+        print(path)
         with open(path) as f:
             data = json.load(f)
         return data

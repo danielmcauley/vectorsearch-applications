@@ -63,7 +63,7 @@ class WeaviateWCS:
         else: 
             self.model = SentenceTransformer(self.model_name_or_path) if self.model_name_or_path else None
 
-        self.return_properties = ['guest', 'title', 'summary', 'content', 'video_id', 'doc_id', 'episode_url', 'thumbnail_url']
+        self.return_properties = ['guest', 'title', 'summary', 'content', 'length_seconds', 'video_id', 'doc_id', 'episode_url', 'thumbnail_url']
 
     def _connect(self) -> None:
         '''
@@ -341,6 +341,7 @@ class WeaviateWCS:
         '''
         self._connect()
         return_properties = return_properties if return_properties else self.return_properties
+        
         query_vector = self._create_query_vector(request, device=device)
         collection = self._client.collections.get(collection_name)
         response = collection.query.hybrid(query=request,
